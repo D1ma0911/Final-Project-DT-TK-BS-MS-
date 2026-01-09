@@ -1,0 +1,84 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=https://en.wikipedia.org/api/rest_v1/page/summary/{{ $('mock input delete later').item.json.title }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "StudentProject/1.0"
+            }
+          ]
+        },
+        "options": {
+          "allowUnauthorizedCerts": false,
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "8217f444-5f23-48d3-a017-c01d52bd05d4",
+      "name": "get wiki summary"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "97a02cba-2d3a-4bf0-ab9b-f50b74fb7626",
+              "name": "clean_title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "d33d7484-86df-415b-becb-a0d4caf8dcc7",
+              "name": "clean_summary",
+              "value": "={{ $json.extract }}",
+              "type": "string"
+            },
+            {
+              "id": "7694d5c1-9502-476b-8cde-f13ce289c420",
+              "name": "clean_image",
+              "value": "={{ $json.thumbnail.source }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        624,
+        0
+      ],
+      "id": "b3e3024b-ef3b-4e1e-9b1b-a8161c25c4ca",
+      "name": "Edit Fields"
+    }
+  ],
+  "connections": {
+    "get wiki summary": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "7c1f208b81835318eec2bea0c06adde56d56cfc0597e86d02721a19da0a18c96"
+  }
+}
