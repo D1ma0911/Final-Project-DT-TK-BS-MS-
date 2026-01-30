@@ -13,3 +13,4 @@ AI Quiz Generation: Uses Google Gemini to spell-check the title and generate a c
 
 ## Output
 The data from all three branches is merged into a single, clean JSON object containing the corrected title, book summary, a list of relevant YouTube videos, and the generated quiz, which is returned to the requester.
+[Final_projectIIT1.pdf](https://github.com/user-attachments/files/24964678/Final_projectIIT1.pdf)
