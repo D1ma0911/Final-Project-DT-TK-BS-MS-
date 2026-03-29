@@ -1,0 +1,56 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a spell checker. I will give you a book title. If it is spelled correctly, return it exactly as is. If it has errors, fix them and return ONLY the corrected title. Do not add punctuation or words like \"The correct title is.\"\nInput: {{ $json.title }}",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        400,
+        16
+      ],
+      "id": "3082b81d-c3cc-4980-a1e4-138125a0657e",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        384,
+        176
+      ],
+      "id": "a9ac0dc3-06f2-4c14-b649-429bb93cf45d",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "bERekQdZ35Kbi0g3",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "522b5cac6e0715497f6471432c55249563e44af4b767d5e7fcf4a80b3b6b8bae"
+  }
+}
