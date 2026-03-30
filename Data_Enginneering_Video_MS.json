@@ -1,0 +1,73 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://www.googleapis.com/youtube/v3/search",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "part",
+              "value": "snippet"
+            },
+            {
+              "name": "maxResult",
+              "value": "3"
+            },
+            {
+              "name": "q",
+              "value": "={{ $json.book_title }} literary analysis essay"
+            },
+            {
+              "name": "type",
+              "value": "video"
+            },
+            {
+              "name": "key",
+              "value": "AIzaSyCCMKaP_n6404IncB0qJWeEXPC7M5vUgcU"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "e8188e6b-bf92-49f0-a611-540ef6d5a76b",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "const videos = $input.all()[0].json.items;\n\nconst formattedVideos = videos.map(video => {\n  return {\n    title: video.snippet.title,\n    url: `https://www.youtube.com/watch?v=${video.id.videoId}`\n  }\n});\n\nreturn formattedVideos;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        624,
+        0
+      ],
+      "id": "6c10d95c-71af-4df5-a614-42df96194d89",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "180e75959fa89911f36a846961f57ff49ea985c9613f2a2d0077e3e294746397"
+  }
+}
